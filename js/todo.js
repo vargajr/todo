@@ -12,7 +12,8 @@ console.log(document.querySelector('.pendingItemContainer div:first-child'));
 
 const revealButton = (event) => {
     console.log(event.currentTarget);
-    event.currentTarget.lastChild.classList.toggle('.revealTodoDelButton');
+    event.currentTarget.lastChild.classList.toggle('delButtonIsHiding');
+    event.currentTarget.lastChild.classList.toggle('revealTodoDelButton');
 }
 
 document.querySelector('.pendingItemContainer div:first-child').addEventListener('click', revealButton);
