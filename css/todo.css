@@ -5,7 +5,7 @@
     --greyColor: #f4f7fc;
     --borderGray: #dddddd;
     --activeBlue: #6664f1;
-    --textDarkDrey: #666666;
+    --textDarkGrey: #666666;
     --todoBackgroundGrey: #e0e8f5;
 }
 
@@ -106,29 +106,64 @@ body {
 }
 
 .list-section {
-    color: var(--textDarkDrey);
+    color: var(--textDarkGrey);
 }
 
-.list-section h4 {
-    margin-bottom: 0rem;
-}
-
-.list-section input {
-    margin: 3px 9px 3px 4px;
-}
 
 /* - list of todos - */
 /* .list {
     
 } */
+/* - animating todo items - */
+.todo--appear{
+    animation: fontSizeChanger 1s 1;
+}
+.todo--disAppear{
+    animation: fontSizeChangerReverse 1s 1;
+}
+@keyframes fontSizeChanger {
+    0% {
+        font-size: 0rem;
+        transform: translate(24rem, 0);
+    }
+    40% {
+        font-size: 1rem;
+        transform: translate(24rem, 0);
+    }
+    100%  {
+        font-size: 1rem;
+        transform: translateX(0, 0);
+    }
+}
+@keyframes fontSizeChangerReverse {
+    0%  {
+        font-size: 1rem;
+        transform: translateX(0, 0);
+    }
+    40% {
+        font-size: 1rem;
+        transform: translate(10rem, 0);
+    }
+    100% {
+        font-size: 0rem;
+        transform: translate(10rem, 0);
+    }
+}
 
-.list .pending {
+
+ /* - CSS of todo items - */
+.list .pending, .list .completed {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
 }
 
-.list .pending .pendingItemContainer {
+.list-section h4 {
+    flex: 1 0 100%;
+    margin-bottom: 0rem;
+}
+
+.list .pending .pendingItemContainer, .list .completed .completedItemContainer {
     flex: 1 1 auto;
     overflow: hidden;
     display: flex;
@@ -136,13 +171,11 @@ body {
     align-items: center;
 }
 
-.list .pending .pendingItemContainer > div {
+.todoContainer {
     flex: 1 1 100%;
     margin: .3rem 0;
-    padding: .3rem 0;
-    border: 1px solid var(--borderGray);
+    padding: .5rem 0;
     border-radius: 3px;
-    background-color: var(--todoBackgroundGrey);
     position: relative;
     cursor: pointer;
     display: flex;
@@ -151,21 +184,87 @@ body {
     align-items: center;
     word-break: keep-all;
 }
+.list .pending .pendingItemContainer .todoContainer {
+    border: 1px solid var(--borderGray);
+    background-color: var(--todoBackgroundGrey);
+}
 
+.list .completed .completedItemContainer .todoContainer {
+    border: none;
+    background-color: var(--white);
+    text-decoration: line-through;
+}
+
+/* - todo checkbox - */
+.todoContainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.todoContainer label {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.checkmark {
+    flex: 0 0 auto;
+    height: 1.3em;
+    width: 1.3em;
+    margin: 0 1em 0 .5em;
+    background-color: var(--white);
+}
+.todoLabel:hover .checkmark {
+    background-color: var(--borderGray);
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+/* .todoLabel input:checked ~ .checkmark {
+    background-color: #2196F3;
+} */
+.todoLabel input:checked ~ .checkmark:after {
+    display: block;
+    position: relative;
+}  
+.todoLabel .checkmark:after {
+    left: .4em;
+    top: .1em;
+    width: .3em;
+    height: .6em;
+    border: solid var(--backgroundRed);
+    border-width: 0 .2em .2em 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+
+/* - todo delete button - */
 .todoDelButton {
     position: absolute;
     right: 0;
-    padding: .3rem 1rem;
+    padding: .6rem 1rem;
+    background-color: var(--backgroundRed);
+    outline: none;
+    border: none;
+    border-radius: 0 3px 3px 0;
 }
 
-.delButtonIsHiding {
+/* .delButtonIsHiding {
     transform: matrix(0, 0, 0, 1, 20, 0);
-    /* matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY()) */
 }
+matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY())
+ */
 
-.revealTodoDelButton {
+/* .revealTodoDelButton {
     animation: revealTodoDelButton 1s ease 0 1;
-}
+} */
 
 @keyframes revealTodoDelButton {
     from {transform: matrix(0, 0, 0, 1, 20, 0);}
@@ -174,21 +273,7 @@ body {
 
 
 
-.list .completed .completedItemContainer > div {
-    margin: .6rem 0;
-    padding: .3rem 0;
-    border: none;
-    border-radius: 3px;
-    background-color: var(--white);
-    position: relative;
-    text-decoration: line-through;
-    cursor: pointer;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    word-break: keep-all;
-}
+
 /* --- list controls --- */
 .list-section .list .controls {
     display: flex;
