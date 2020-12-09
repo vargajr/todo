@@ -247,7 +247,8 @@ body {
 /* - todo delete button - */
 .todoContainer .todoDelButton {
     flex: 0 1 auto;
-    padding: .6rem 1rem;
+    font-size: 1em;
+    padding: .6em 1em;
     background-color: var(--backgroundRed);
     outline: none;
     border-radius: 0 3px 3px 0;
@@ -271,11 +272,11 @@ matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY())
     animation: revealTodoDelButton 1s ease 0 1;
 } */
 
-@keyframes revealTodoDelButton {
+/* @keyframes revealTodoDelButton {
     from {transform: matrix(0, 0, 0, 1, 20, 0);}
     to {transform: matrix(1, 0, 0, 1, 0, 0);}
     }
-
+ */
 
 
 

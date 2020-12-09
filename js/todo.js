@@ -36,15 +36,17 @@ document.querySelector('.input-section button').addEventListener('click', insert
 
 
 
-/* 
-console.log(document.querySelector('.pendingItemContainer div:first-child'));
 
 
-const revealButton = (event) => {
-    console.log(event.currentTarget);
+
+/* const revealButton = (event) => {
+    console.log('event: ', event);
+    console.log('currentTarget: ',event.currentTarget);
+    console.log('target :', event.target);
+    console.log('----------------------------------');
+
     event.currentTarget.lastChild.classList.toggle('delButtonIsHiding');
     event.currentTarget.lastChild.classList.toggle('revealTodoDelButton');
 }
 
-document.querySelector('.pendingItemContainer div:first-child').addEventListener('click', revealButton);
- */
+document.querySelector('.pendingItemContainer').addEventListener('mouseenter', revealButton); */
