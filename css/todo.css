@@ -174,14 +174,12 @@ body {
 .todoContainer {
     flex: 1 1 100%;
     margin: .3rem 0;
-    padding: .5rem 0;
     border-radius: 3px;
     position: relative;
-    cursor: pointer;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: space-between;
+    align-items: stretch;
     word-break: keep-all;
 }
 .list .pending .pendingItemContainer .todoContainer {
@@ -208,6 +206,7 @@ body {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+    cursor: pointer;
 }
 
 .checkmark {
@@ -246,15 +245,21 @@ body {
 
 
 /* - todo delete button - */
-.todoDelButton {
-    position: absolute;
-    right: 0;
+.todoContainer .todoDelButton {
+    flex: 0 1 auto;
     padding: .6rem 1rem;
     background-color: var(--backgroundRed);
     outline: none;
-    border: none;
     border-radius: 0 3px 3px 0;
+    color: var(--white);
 }
+.pendingItemContainer .todoContainer .todoDelButton {
+    border: 1px solid var(--backgroundRed);
+}
+.completedItemContainer .todoContainer .todoDelButton {
+    border: none;
+}
+
 
 /* .delButtonIsHiding {
     transform: matrix(0, 0, 0, 1, 20, 0);

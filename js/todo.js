@@ -8,15 +8,14 @@ const change = () => {
 document.querySelector('.date-section').addEventListener('click', change);
 
 
-const adder = (note="ez egy todo", selected, whereTo) => {
+const adder = (note, selected, whereTo) => {
     const id = new Date().getTime().toString()
-    const todoContent = "ez egy todo";
     const todoTemplateLiteral = `
     <div class="todoContainer todo--appear">
         <label class="todoLabel" for="${id}">
             <input ${selected ? 'checked' : ''} type="checkbox" id="${id}">
             <span class="checkmark"></span>
-            ${todoContent}
+            ${note}
         </label>
         <button class="todoDelButton delButtonIsHiding">
             <i class="far fa-trash-alt"></i>
@@ -27,7 +26,10 @@ const adder = (note="ez egy todo", selected, whereTo) => {
 }
 
 const insertTodoDiv = () => {
-    adder('todo1', false, 'pendingItemContainer');
+    const todoNote = document.querySelector('.manager-window .input-section input').value;
+    if (!todoNote) {return};
+    document.querySelector('.manager-window .input-section input').value = '';
+    adder(todoNote, false, 'pendingItemContainer');
 };
 
 document.querySelector('.input-section button').addEventListener('click', insertTodoDiv);
