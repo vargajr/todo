@@ -3,7 +3,7 @@
     --backgroundRed: #f45c69;
     --white: #ffffff;
     --greyColor: #f4f7fc;
-    --borderGray: #dddddd;
+    --borderGray: #cccccc; /* dddddd */
     --activeBlue: #6664f1;
     --textDarkGrey: #666666;
     --todoBackgroundGrey: #e0e8f5;
@@ -42,9 +42,10 @@ body {
     border-radius: 3px;
     padding: 1rem;
     margin-bottom: 2rem;
+    overflow: hidden;
 }
 
-.date-section {
+.dateSection {
     color: var(--backgroundRed);
     font-size: 1.3rem;
     margin-top: 2rem;
@@ -124,11 +125,11 @@ body {
 @keyframes fontSizeChanger {
     0% {
         font-size: 0rem;
-        transform: translate(24rem, 0);
+        transform: translate(25rem, 0);
     }
-    40% {
+    50% {
         font-size: 1rem;
-        transform: translate(24rem, 0);
+        transform: translate(25rem, 0);
     }
     100%  {
         font-size: 1rem;
@@ -140,19 +141,19 @@ body {
         font-size: 1rem;
         transform: translateX(0, 0);
     }
-    40% {
+    50% {
         font-size: 1rem;
-        transform: translate(10rem, 0);
+        transform: translate(25rem, 0);
     }
     100% {
         font-size: 0rem;
-        transform: translate(10rem, 0);
+        transform: translate(25rem, 0);
     }
 }
 
 
  /* - CSS of todo items - */
-.list .pending, .list .completed {
+.pending, .completed {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -174,7 +175,7 @@ body {
 .todoContainer {
     flex: 1 1 100%;
     margin: .3rem 0;
-    border-radius: 3px;
+    border-radius: 4px;
     position: relative;
     display: flex;
     flex-flow: row nowrap;
@@ -183,12 +184,10 @@ body {
     word-break: keep-all;
 }
 .list .pending .pendingItemContainer .todoContainer {
-    border: 1px solid var(--borderGray);
     background-color: var(--todoBackgroundGrey);
 }
 
 .list .completed .completedItemContainer .todoContainer {
-    border: none;
     background-color: var(--white);
     text-decoration: line-through;
 }
@@ -246,13 +245,15 @@ body {
 
 /* - todo delete button - */
 .todoContainer .todoDelButton {
+    position: relative;
     flex: 0 1 auto;
     font-size: 1em;
     padding: .6em 1em;
     background-color: var(--backgroundRed);
     outline: none;
-    border-radius: 0 3px 3px 0;
+    border-radius: 0 4px 4px 0;
     color: var(--white);
+    cursor: pointer;
 }
 .pendingItemContainer .todoContainer .todoDelButton {
     border: 1px solid var(--backgroundRed);
@@ -260,25 +261,14 @@ body {
 .completedItemContainer .todoContainer .todoDelButton {
     border: none;
 }
-
-
-/* .delButtonIsHiding {
-    transform: matrix(0, 0, 0, 1, 20, 0);
+.hideDelButton {
+    transition: all .2s ease;
+    transform: translateX(3.1em) scaleX(0);
 }
-matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY())
- */
-
-/* .revealTodoDelButton {
-    animation: revealTodoDelButton 1s ease 0 1;
-} */
-
-/* @keyframes revealTodoDelButton {
-    from {transform: matrix(0, 0, 0, 1, 20, 0);}
-    to {transform: matrix(1, 0, 0, 1, 0, 0);}
-    }
- */
-
-
+.revealDelButton {
+    transition: all .2s ease;
+    transform: translateX(0) scaleX(1);
+}
 
 /* --- list controls --- */
 .list-section .list .controls {
@@ -286,7 +276,7 @@ matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY())
     flex-flow: row nowrap;
     justify-content: space-around;
     color: #000000;
-    padding: .5rem 3rem;
+    padding: 1.5rem 3rem .5rem;
 }
 .list-section .list .controls span{
     cursor: pointer;
